@@ -128,8 +128,35 @@ This is a RESTful API built with Node.js and Express.js for managing books and t
 
 ---
 
-## 📤 Submission Instructions:
+## 💡 **Design Decisions & Assumptions:**
 
-1. Push your code to a GitHub repository.
-2. Share the public repo link by replying to the interview email or sending it to:
-   📧 **[humans@billeasy.in](mailto:humans@billeasy.in)**
+* JWT-based authentication for secure API access.
+* One user can review a book only once.
+* Book search is case-insensitive and supports partial matches.
+* Pagination is implemented to handle large data sets efficiently.
+
+---
+
+## 📝 **Example API Requests (Postman / cURL):**
+
+```bash
+# Register a User
+curl -X POST http://localhost:5000/api/auth/signup \
+  -H "Content-Type: application/json" \
+  -d '{"username": "testuser", "password": "testpass"}'
+
+# Login to get a Token
+curl -X POST http://localhost:5000/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"username": "testuser", "password": "testpass"}'
+
+# Get All Books (with Token)
+curl -X GET http://localhost:5000/api/books \
+  -H "Authorization: Bearer <token>"
+
+# Search for Books
+curl -X GET 'http://localhost:5000/api/search?q=Harry&page=1&limit=10'
+```
+
+---
+
